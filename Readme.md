@@ -1,10 +1,19 @@
 # Odin Notes
 
+## Adding builtin types
+
+Odin's language specification doesn't support operator overloading for non-user symbols. That doesn't stop the user from making a fork and adding builtin types as they desire.
+
+(TODO: Not finished)
+~~See : [compiler_adding_builtin_types.md](compiler_adding_builtin_types.md)~~
+
 ## Packages
 
 ### Non-cyclic
 
 Packages must have their depedencies resolved downstream. This means at worst case until a proper generalization can be made, two definitions may need to be present between packages until a mutual depedent package can provide that dependency.
+
+This can be alliviated (possibly, not tested pragmatically) without "monolithic packages feature fork" by having "package-pairs". Where there is a header and terminating package. The header package can container functionality or state information that would not generate cyclic dependencies. The terminating package would resolve in a cyclic depenedency if not used in a more "downstream" package.
 
 ### 1:1 With filesystem directories
 
