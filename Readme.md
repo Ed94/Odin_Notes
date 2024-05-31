@@ -12,7 +12,7 @@ Packages are tied to the filesystem by default.
 If you would like to be able to organize a package iresspective of the filesystem a fork is required from the offical compiler and `try_add_import_path` in `parser.cpp` would need to be adjusted *(as of: 2024/5/30)*.  
 For support with ols (Odin Language Server), the changes are more rigourous as there are serveral places making the assumption that the package is the immeidate relative directory.
 
-### Mapping Symbols for Definitions across pacakages (aliasing)
+### Mapping Symbols for Definitions across packages (aliasing)
 
 Any definitions not defined within its own package (foreign to the package) must have the package's implicit or defined name prefixed first and accessed with the member access operator: `.`, (`<package_associated_alias>).symbol`)
 
@@ -29,6 +29,8 @@ This would be used with explicit procedure overload mappings to create succint p
 }
 ```
 (note: the make mapping can for example be extended or modified using this method )
+
+This could be allievated by setting up a stage metaprogram that can auto alias commonly used symbols across packages of a codebase into a "mappings.odin" file.
 
 ## Managing a "persistent context"
 
@@ -96,7 +98,7 @@ See:
 * `vendor:microui`
 * `vendor:nanovg`
 
-To alleviate the constant explicit passign the following pattern may be used (example uses spall):
+To alleviate the constant explicit passign the following wrapper pattern may be used (example uses spall):
 
 ```odin
 package <codebase>
