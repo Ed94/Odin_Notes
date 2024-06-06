@@ -9,6 +9,45 @@ Odin's language specification doesn't support operator overloading for non-user 
 
 ## Packages
 
+### File name tricks
+
+The compiler automatically omits specific files based on their names
+
+* Files that start with a `.` are ignored.
+* If the file has a Operating System or Architecture target that doesn't match the target for compilation.
+
+```cpp
+// Note this was pasted in 2024/6/6 (check the source file for latest, See `is_excluded_target_filename` in build_settings.cpp
+
+gb_global String target_os_names[TargetOs_COUNT] = {
+	str_lit(""),
+	str_lit("windows"),
+	str_lit("darwin"),
+	str_lit("linux"),
+	str_lit("essence"),
+	str_lit("freebsd"),
+	str_lit("openbsd"),
+	str_lit("netbsd"),
+	str_lit("haiku"),
+	
+	str_lit("wasi"),
+	str_lit("js"),
+	str_lit("orca"),
+
+	str_lit("freestanding"),
+};
+
+gb_global String target_arch_names[TargetArch_COUNT] = {
+	str_lit(""),
+	str_lit("amd64"),
+	str_lit("i386"),
+	str_lit("arm32"),
+	str_lit("arm64"),
+	str_lit("wasm32"),
+	str_lit("wasm64p32"),
+};
+```
+
 ### Non-cyclic
 
 Packages must have their depedencies resolved downstream. This means at worst case until a proper generalization can be made, two definitions may need to be present between packages until a mutual depedent package can provide that dependency.
